@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    {{ template "header" }}
+
+    
+    <h3>Hola {{ .Name }}</h3>
+    <p>
+        Tu edad es {{ .Age }}    
+    </p>
+
+    <!-- Variables -->
+    <!-- with end, bloque donde se debe usar la variable -->
+    {{ with $valor := "Mi variable" }}
+        <p> {{$valor}} </p>
+    {{ end }}
+    
+    <!-- Operadores logicos 
+        not !
+        and &&
+        or || -->
+    {{ if not .Activo }}
+        <p>El usuario esta activo en la plataforma</p>
+    {{ else }}
+        <p>El usuario no esta activo en la plataforma</p>
+    {{end}}
+
+    {{ if (and .Activo .Admin) }}
+        <p>Eres administrador</p>
+    {{ else }}
+        <p>No eres administrador</p>
+    {{ end }}
+
+    <!-- Operadores condicionales 
+        eq ==
+        ne != 
+        lt < 
+        le <=
+        gt > 
+        ge >= 
+    -->
+    
+    {{ if gt .Age 22 }}
+        <p>El usuario tiene más de 22 años</p>
+    {{ end }}
+
+
+    <hr>
+    <h3>Bucles</h3>
+
+    <ul>
+        {{ range .Cursos }}
+            <li> {{ .Nombre }} </li>
+        {{ end }}
+    </ul>
+
+    <hr>
+    <h3>Heredar bloques</h3>
+    {{ template "footer" }}
+
+</body>
+</html>
